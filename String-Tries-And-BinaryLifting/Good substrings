@@ -1,0 +1,164 @@
+package com.nabajyoti;
+
+// program with user defined FastReader (most efficient way to read input from user)
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.SQLOutput;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+class StringTrie {
+    private class Node{
+        int cnt;
+        int badChars;
+        Node[] ch;
+        public Node(){
+            cnt=0;
+            badChars =0;
+            ch = new Node[26];
+        }
+    }
+
+    private Node root;
+    private boolean[] map;
+    public StringTrie(){
+        root = new Node();
+        map = new boolean[26];
+    }
+
+    public void setBadChars(String s){
+        for(int i=0;i<26;i++){
+            map[i] = s.charAt(i)-'0'==0?true:false;
+        }
+    }
+
+    public int query(int k){
+        int[] ans = {0};
+        Node cur = root;
+        for(int i = 0;i<26;i++){
+            dfs(ans, k, cur.ch[i]);
+        }
+        return ans[0];
+    }
+
+    private void dfs(int[] ans, int k, Node node){
+        if(node==null) return;
+        if(node.badChars>k) return;
+        ans[0]++;
+        for(int i=0;i<26;i++) {
+            dfs(ans,k,node.ch[i]);
+        }
+    }
+
+    public void add(String s){
+        Node cur = root;
+        int badC = 0;
+        for(int i=0;i<s.length();i++){
+            int x = s.charAt(i) - 'a';
+            if(cur.ch[x]==null){
+                cur.ch[x] = new Node();
+            }
+            cur=cur.ch[x];
+            cur.cnt = (i+1);
+            if(map[x]){
+                badC++;
+                cur.badChars = badC;
+            }
+        }
+    }
+}
+
+
+public class Main {
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(
+                    new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
+
+    public static void main(String[] args) {
+        FastReader s = new FastReader();
+
+        /*int n = s.nextInt();
+        int[] array = new int[n];
+        for(int i=0;i<n;i++)
+        {
+            array[i]= s.nextInt();
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(array[i]/4>0)
+            {
+                array[i]=array[i]/4;
+            }
+            else
+            {
+                array[i]=-1;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(array[i]+" ");
+        }
+        System.out.print("\n");*/
+        int t = 1;
+        while (t > 0) {
+            t--;
+            String s1 = s.next();
+            StringTrie stringTrie = new StringTrie();
+            String map1 = s.next();
+            stringTrie.setBadChars(map1);
+            int k = s.nextInt();
+
+            for(int i=0;i<s1.length();i++){
+                stringTrie.add(s1.substring(i));
+            }
+
+            int ans =0;
+            ans += stringTrie.query(k);
+            System.out.println(ans);
+        }
+
+    }
+
+
+}
