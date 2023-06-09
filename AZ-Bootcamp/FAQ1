@@ -1,0 +1,15 @@
+1) Add two very large numbers whih can't fit into any type
+	Are numbers positive?-> Yes. Do I have to consider negative numbers also?
+	Are there any leading zeros? -> No 
+	### 1. Read the question 2. Find the missing points 3. Solve the problem
+	Solution:
+	1. State your assumptions first
+		a. Numbers are represented using vectors of digits
+		b. Vectors starts from less significant digit of the number
+	2. Mention your algorithm
+		a. How you are going to mantain carry
+	3. Code it up
+	
+
+	Can you Optimise further ? (THINK!)
+	Mention TC and SC
