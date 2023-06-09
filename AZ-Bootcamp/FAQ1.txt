@@ -13,3 +13,23 @@
 
 	Can you Optimise further ? (THINK!)
 	Mention TC and SC
+
+2. Given an array of size n, find the majority element. The majority element is the element that appears more tha [n/2] times;
+
+    what if there is no majority element? 
+    Can array be empty? No
+    Solution: 
+    Voting algorithm but first give the hashing solution
+
+3. Implement next permutation, which rearranges numbers into the lexicographically next greater permutation
+Expected solution : TC( O(n)) and SC: O(1)
+
+    Are the numbers distinct? 
+    Solution:
+    Find the first dip from the last, and then replace it with its next bigger element in the chorai, and then replace it bla bla
+
+4.
+Given an array of non-negative integers, you are initially positioned at 
+the first index of the array. Each element in the aray represents your maximum jump length at that position. Determine if you are able to reach the last index.
+
+
