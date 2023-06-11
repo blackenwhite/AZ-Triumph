@@ -1,0 +1,14 @@
+5. Given an array of n+1 umbers from 1 to n.
+Only one number is repeating. Find that repeating number.
+    Sol- sum-(sum of 1 to n)
+6. Given an array of n+2 numbers from 1 to n.
+Only two different numbers are repeating.
+Find those repeating  numbers
+    Sol- XOR and then dividing (1 to n) into two sets based on the rightmost set bit
+
+7. Given an array of n numbers which contains elements from1 to n. Find all repeating numbers.
+    Sol: Maintain freq in the same array only (by adding n+1 )
+
+8. Sort the array containing only 0s and 1s
+9. Sort the array conatining only 0s, 1s and 2s
+
