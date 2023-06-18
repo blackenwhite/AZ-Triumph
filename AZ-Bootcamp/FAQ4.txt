@@ -1,0 +1,22 @@
+FAQ4.txt
+1. A string of uppercase alphabets can be encoded to a string of digits,
+by replacing each alphabet with their 1-based index.
+For example, "BC" can be coded to "23" and "CZ" can be encoded to"326".
+
+Given a string of digits, encoded, find the number of decoded strings.
+
+Eg. for "226", possible decoded strings are BZ, VF, BBF. 
+So the answer is 3
+
+2. Edit distance
+3. You are given three strings X,Y and Z. You need to determine 
+if string Z is an interleaving of X and Y. String Z is said to be 
+interleaving X and Y if all the characters of X and Y are present in Z and the order of characters 
+int the individual strings is preserved
+
+4. You are given a string s and a pattern p.
+The string s consists of only lower case letters while 
+the pattern can also contain '?' and '*'.
+You need to find whether the pattern ccna match the string when:
+'?' - Matches any single character in s.
+'*' - Matches any sequence of characters (including the empty sequence)
