@@ -1,0 +1,101 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n,k;
+string s;
+int arr[1001];
+int dp[1001][3][1001],back[1001][3][1001];
+map<char,int> mp;
+map<int,char> rmp;
+
+bool result(int x,int y){
+    return y==((x+1)%3);
+}
+
+int rec(int level,int last, int changes_left){
+    if(changes_left<0){
+        return -1e9;
+    }
+
+    if(level==n){
+        return 0;
+    }
+
+    if(dp[level][last][changes_left]!=-2) return dp[level][last][changes_left];
+
+    int ans=-1;
+    back[level][last][changes_left]=-1;
+    for(int x=0;x<3;x++){
+        int temp =result(x,arr[level])+rec(level+1,x,changes_left-(x==last?0:1));
+
+        
+        if(ans<temp){
+            ans=temp;
+            back[level][last][changes_left]=x;
+        }
+    }
+    return dp[level][last][changes_left]=ans;
+
+}
+
+string final_ans;
+void generate(int level,int last,int changes_left){
+   
+    if(level==n||changes_left<0) return;
+
+    int x=back[level][last][changes_left];
+    final_ans+=rmp[x];
+
+    generate(level+1,x,changes_left-(x==last?0:1));
+}
+
+void solve(){
+    cin>>n>>k;
+    cin>>s;
+
+    for(int i=0;i<n;i++){
+        arr[i]=mp[s[i]];
+    }
+
+    for(int i=0;i<=n;i++){
+        for(int j=0;j<3;j++){
+            for(int x=0;x<=k;x++){
+                dp[i][j][x]=-2;
+            }
+        }
+    }
+
+    int ans=-1;
+    int first=-1;
+    for(int i=0;i<3;i++){
+        if(result(i,arr[0])+rec(1,i,k)>ans){
+            ans=result(i,arr[0])+rec(1,i,k);
+            first=i;
+        }
+    }
+
+    final_ans="";
+    final_ans+=rmp[first];
+    generate(1,first,k);
+    cout<<ans<<endl;
+    cout<<final_ans<<endl;
+}
+
+int main(){
+    ios_base::sync_with_stdio();
+    cin.tie(0);cout.tie(0);
+
+    mp['P']=0;
+    mp['R']=1;
+    mp['S']=2;
+    rmp[0]='P';
+    rmp[1]='R';
+    rmp[2]='S';
+
+    int t;cin>>t;
+    while(t--){
+        solve();
+    }
+
+
+}
