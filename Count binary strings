@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define mod 1000000007
+#define IOS                  \
+    ios::sync_with_stdio(0); \
+    cin.tie(0);              \
+    cout.tie(0);
+
+ll exponent(ll a, ll b)
+{
+    ll ans = 1;
+    while (b > 0)
+    {
+        if (b % 2 == 1)
+        {
+            ans = (ans * a) % mod;
+        }
+        a = (a * a) % mod;
+        b /= 2;
+    }
+    return ans;
+}
+
+ll add(ll a, ll b)
+{ // O(1)
+    ll ans = (a + b);
+    if (ans >= mod)
+        ans -= mod;
+    if (ans < 0)
+        ans += mod;
+    return ans;
+}
+
+ll sub(ll a, ll b)
+{ // O(1)
+    return add(a, -b);
+}
+
+ll mult(ll a, ll b) // O(1)
+{
+    return ((a % mod) * (b % mod)) % mod;
+}
+//----------------------------------------
+
+ll dp[1000010][8];
+
+ll rec(ll i, ll lastThree, ll N)
+{
+    if (i == N)
+    {
+        return 1;
+    }
+
+    if (dp[i][lastThree] != -1)
+    {
+        return dp[i][lastThree];
+    }
+    ll ans = 0;
+    if (i>=3 && lastThree == 2)
+    {
+        // ans+=rec(i+1, 7, N);
+        ans = (ans + rec(i + 1, 5, N)) % mod;
+    }
+    else
+    {
+        // ans += rec(i+1, ((lastThree<<1)&7)|1, N); // adding 1 to the last
+        ans = (ans + rec(i + 1, ((lastThree << 1) & 7) | 1, N)) % mod;
+        // ans += rec(i+1, ((lastThree<<1)&7), N); // adding 0 to the last
+        ans = (ans + rec(i + 1, ((lastThree << 1) & 7), N)) % mod;
+    }
+    return dp[i][lastThree] = ans;
+}
+
+int main()
+{
+    IOS
+    ll t;
+    cin >> t;
+    memset(dp, -1, sizeof(dp));
+    while (t--)
+    {
+        ll n;
+        cin >> n;
+        ll ans = rec(0, 0, n);
+        cout << ans << "\n";
+    }
+
+    return 0;
+}
