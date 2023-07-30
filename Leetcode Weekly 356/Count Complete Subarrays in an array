@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int countCompleteSubarrays(vector<int>& nums) {
+        
+        map<int,int>all,mp;
+        int n=nums.size();
+        for(int i:nums){
+            all[i]++;
+        }
+        
+        int x = all.size();
+        // cout<<x<<"\n";
+        int ans=0;
+        int left=0, right=0;
+        for(;left<n;left++){
+            while(right<n && mp.size()<x){
+                
+                mp[nums[right]]++;
+                // cout<<"right = "<<right<<" "<<mp.size()<<"\n";
+                right++;
+            }
+            if(mp.size()==x) {
+                // cout<<"left= "<<left<<" right="<<right<<"\n";
+                ans+=(n-right+1);
+            }
+            mp[nums[left]]--;
+            if(mp[nums[left]]==0) mp.erase(nums[left]);
+        }
+        return ans;
+    }
+};
