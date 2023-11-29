@@ -1,4 +1,5 @@
 /*
+
 There are N Ranks and M students in a class. Each student has a happiness value for the rank in the class he gets. The i th Student gets happy[i][j] on getting a rank j. It's ok to not keep all students in the ranks (They get 0 happiness). At most one student can be assigned to a rank. The total happiness of the assignment can be calculated as Sum of Happiness of each of the students in the class. Find the best way to calculate.
 */ 
 #include <bits/stdc++.h>
