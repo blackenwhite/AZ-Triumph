@@ -1,0 +1,25 @@
+// simple implementation of ticket lock
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class TicketLock {
+    private AtomicInteger nextTicket;
+    private AtomicInteger nowServing;
+
+    public TicketLock() {
+        nextTicket = new AtomicInteger(0);
+        nowServing = new AtomicInteger(0);
+    }
+
+    public void lock() {
+        int myTicket = nextTicket.getAndIncrement();
+        while (myTicket != nowServing.get()) {
+            // Spin until it's our turn
+            Thread.yield();
+        }
+    }
+
+    public void unlock() {
+        nowServing.getAndIncrement(); // Increment the now serving ticket
+    }
+}
